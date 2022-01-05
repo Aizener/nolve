@@ -20,12 +20,6 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-type TabItem = {
-  iconName: string,
-  title: string,
-  name: string
-}
-
 const router = useRouter()
 
 const tabs = ref([
@@ -45,5 +39,6 @@ const handleTouchTab = (tab: TabItem,idx: number) => {
 .tabbar {
   height: 50px;
   border-top: 1px solid #eee;
+  z-index: 9999;
 }
 </style>

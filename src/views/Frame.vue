@@ -3,7 +3,9 @@
     <div class="frame__container flex-1">
       <router-view v-slot="{ Component }">
         <transition name="fade">
-          <component :is="Component" />
+          <keep-alive>
+            <component :is="Component" />
+          </keep-alive>
         </transition>
       </router-view>
     </div>
@@ -19,6 +21,12 @@ import TabBar from '../components/TabBar.vue'
 </script>
 
 <style lang="scss">
+.frame {
+  &__container {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
 .fade-enter-from {
   transform: translateX(-100%);
 }
