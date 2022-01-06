@@ -1,167 +1,169 @@
 <template>
-  <div class="home w-100 h-100 px-15 py-20">
-    <div class="home-search flex flex-col-center px-10 py-8">
-      <var-icon namespace="icon" name="search" color="#ccc" />
-      <span class="fs-12 color-999 ml-5">输入作者或书名</span>
-    </div>
-
-    <TitleRow
-      class="mt-15"
-      title="排行榜"
-      subtitle="根据你的喜好推荐的榜单书籍"
-      right-title="查看更多"
-      right-icon="chevron-right"
-      @click="handleClick"
-    ></TitleRow>
-
-    <div>
-      <var-button
-        :color="
-          active === idx ?
-            'linear-gradient(to right, #FF8C00	, #F4A460	)' : '#fff'
-        "
-        :text-color="
-          active === idx ?
-            '#fff' : '#666'
-        "
-        size="small"
-        class="br-round mr-10 mt-10"
-        v-for="(item, idx) in categories"
-        :key="idx"
-        @click="active = idx"
-      >{{ item.title }}</var-button>
-    </div>
-
-    <div class="flex flex-wrap flex-row-between">
-      <BookRow
-        class="flex-1 mt-15"
-        v-for="(item, idx) in books"
-        :key="idx"
-        :book="item"
-      ></BookRow>
-    </div>
-
-    <div class="book-category">
-      <TitleRow
-        class="mt-15"
-        title="为你推荐"
-        subtitle="根据你的阅读历史推荐"
-        right-title="换一换"
-        @click="handleClick"
-      >
-        <template #right-icon>
-          <var-icon namespace="icon" color="#999" name="huanyihuan" size="20" />
-        </template>
-      </TitleRow>
-
-      <div class="books flex mt-15">
-        <div class="book flex flex-col">
-          <var-image class="book-cover" lazy src="https://www.qb5.tw/files/article/image/79/79575/79575s.jpg" />
-          <p class="book-title mt-5 fs-12">我的冰山美女老婆</p>
-        </div>
-        <div class="book flex flex-col">
-          <var-image class="book-cover" lazy src="https://www.qb5.tw/files/article/image/79/79575/79575s.jpg" />
-          <p class="book-title mt-5 fs-12">我的冰山美女老婆</p>
-        </div>
-        <div class="book flex flex-col">
-          <var-image class="book-cover" lazy src="https://www.qb5.tw/files/article/image/79/79575/79575s.jpg" />
-          <p class="book-title mt-5 fs-12">我的冰山美女老婆</p>
-        </div>
-        <div class="book flex flex-col">
-          <var-image class="book-cover" lazy src="https://www.qb5.tw/files/article/image/79/79575/79575s.jpg" />
-          <p class="book-title mt-5 fs-12">我的冰山美女老婆</p>
-        </div>
+  <div class="home w-100 pb-15">
+    <div class="home-search-wrapper flex flex-col-center px-15">
+      <div class="home-search flex flex-col-center w-100 px-10 py-8">
+        <var-icon namespace="icon" name="search" color="#ccc" />
+        <span class="fs-12 color-999 ml-5">输入作者或书名</span>
       </div>
     </div>
 
-    <div class="book-category">
+    <div class="home-container px-15">
       <TitleRow
         class="mt-15"
-        title="为你推荐"
+        title="排行榜"
+        subtitle="根据你的喜好推荐的榜单书籍"
         right-title="查看更多"
         right-icon="chevron-right"
         @click="handleClick"
       ></TitleRow>
 
-      <div class="books flex mt-15">
-        <div class="book flex flex-col">
-          <var-image class="book-cover" lazy src="https://www.qb5.tw/files/article/image/79/79575/79575s.jpg" />
-          <p class="book-title mt-5 fs-12">我的冰山美女老婆</p>
+      <div>
+        <var-button
+          :color="
+            active === idx ?
+              'linear-gradient(to right, #FF8C00	, #F4A460	)' : '#fff'
+          "
+          :text-color="
+            active === idx ?
+              '#fff' : '#666'
+          "
+          size="small"
+          class="br-round mr-10 mt-10"
+          v-for="(item, idx) in categories"
+          :key="idx"
+          @click="active = idx"
+        >{{ item.title }}</var-button>
+      </div>
+
+      <div class="flex flex-wrap flex-row-between">
+        <BookRow
+          class="flex-1 mt-15"
+          v-for="(item, idx) in books"
+          :key="idx"
+          :book="item"
+        ></BookRow>
+      </div>
+
+      <div class="book-category">
+        <TitleRow
+          class="mt-15"
+          title="为你推荐"
+          subtitle="根据你的阅读历史推荐"
+          right-title="换一换"
+          @click="handleClick"
+        >
+          <template #right-icon>
+            <var-icon namespace="icon" color="#999" name="huanyihuan" size="20" />
+          </template>
+        </TitleRow>
+
+        <div class="books flex mt-15">
+          <div class="book flex flex-col">
+            <var-image class="book-cover" lazy src="https://www.qb5.tw/files/article/image/79/79575/79575s.jpg" />
+            <p class="book-title mt-5 fs-12">我的冰山美女老婆</p>
+          </div>
+          <div class="book flex flex-col">
+            <var-image class="book-cover" lazy src="https://www.qb5.tw/files/article/image/79/79575/79575s.jpg" />
+            <p class="book-title mt-5 fs-12">我的冰山美女老婆</p>
+          </div>
+          <div class="book flex flex-col">
+            <var-image class="book-cover" lazy src="https://www.qb5.tw/files/article/image/79/79575/79575s.jpg" />
+            <p class="book-title mt-5 fs-12">我的冰山美女老婆</p>
+          </div>
+          <div class="book flex flex-col">
+            <var-image class="book-cover" lazy src="https://www.qb5.tw/files/article/image/79/79575/79575s.jpg" />
+            <p class="book-title mt-5 fs-12">我的冰山美女老婆</p>
+          </div>
         </div>
-        <div class="book flex flex-col">
-          <var-image class="book-cover" lazy src="https://www.qb5.tw/files/article/image/79/79575/79575s.jpg" />
-          <p class="book-title mt-5 fs-12">我的冰山美女老婆</p>
+      </div>
+
+      <div class="book-category">
+        <TitleRow
+          class="mt-15"
+          title="为你推荐"
+          right-title="查看更多"
+          right-icon="chevron-right"
+          @click="handleClick"
+        ></TitleRow>
+
+        <div class="books flex mt-15">
+          <div class="book flex flex-col">
+            <var-image class="book-cover" lazy src="https://www.qb5.tw/files/article/image/79/79575/79575s.jpg" />
+            <p class="book-title mt-5 fs-12">我的冰山美女老婆</p>
+          </div>
+          <div class="book flex flex-col">
+            <var-image class="book-cover" lazy src="https://www.qb5.tw/files/article/image/79/79575/79575s.jpg" />
+            <p class="book-title mt-5 fs-12">我的冰山美女老婆</p>
+          </div>
+          <div class="book flex flex-col">
+            <var-image class="book-cover" lazy src="https://www.qb5.tw/files/article/image/79/79575/79575s.jpg" />
+            <p class="book-title mt-5 fs-12">我的冰山美女老婆</p>
+          </div>
+          <div class="book flex flex-col">
+            <var-image class="book-cover" lazy src="https://www.qb5.tw/files/article/image/79/79575/79575s.jpg" />
+            <p class="book-title mt-5 fs-12">我的冰山美女老婆</p>
+          </div>
         </div>
-        <div class="book flex flex-col">
-          <var-image class="book-cover" lazy src="https://www.qb5.tw/files/article/image/79/79575/79575s.jpg" />
-          <p class="book-title mt-5 fs-12">我的冰山美女老婆</p>
+      </div>
+
+      <div class="book-category">
+        <TitleRow
+          class="mt-15"
+          title="为你推荐"
+          right-title="查看更多"
+          right-icon="chevron-right"
+          @click="handleClick"
+        ></TitleRow>
+
+        <div class="books flex mt-15">
+          <div class="book flex flex-col">
+            <var-image class="book-cover" lazy src="https://www.qb5.tw/files/article/image/79/79575/79575s.jpg" />
+            <p class="book-title mt-5 fs-12">我的冰山美女老婆</p>
+          </div>
+          <div class="book flex flex-col">
+            <var-image class="book-cover" lazy src="https://www.qb5.tw/files/article/image/79/79575/79575s.jpg" />
+            <p class="book-title mt-5 fs-12">我的冰山美女老婆</p>
+          </div>
+          <div class="book flex flex-col">
+            <var-image class="book-cover" lazy src="https://www.qb5.tw/files/article/image/79/79575/79575s.jpg" />
+            <p class="book-title mt-5 fs-12">我的冰山美女老婆</p>
+          </div>
+          <div class="book flex flex-col">
+            <var-image class="book-cover" lazy src="https://www.qb5.tw/files/article/image/79/79575/79575s.jpg" />
+            <p class="book-title mt-5 fs-12">我的冰山美女老婆</p>
+          </div>
         </div>
-        <div class="book flex flex-col">
-          <var-image class="book-cover" lazy src="https://www.qb5.tw/files/article/image/79/79575/79575s.jpg" />
-          <p class="book-title mt-5 fs-12">我的冰山美女老婆</p>
+      </div>
+
+      <div class="book-category">
+        <TitleRow
+          class="mt-15"
+          title="为你推荐"
+          right-title="查看更多"
+          right-icon="chevron-right"
+          @click="handleClick"
+        ></TitleRow>
+
+        <div class="books flex mt-15">
+          <div class="book flex flex-col">
+            <var-image class="book-cover" lazy src="https://www.qb5.tw/files/article/image/79/79575/79575s.jpg" />
+            <p class="book-title mt-5 fs-12">我的冰山美女老婆</p>
+          </div>
+          <div class="book flex flex-col">
+            <var-image class="book-cover" lazy src="https://www.qb5.tw/files/article/image/79/79575/79575s.jpg" />
+            <p class="book-title mt-5 fs-12">我的冰山美女老婆</p>
+          </div>
+          <div class="book flex flex-col">
+            <var-image class="book-cover" lazy src="https://www.qb5.tw/files/article/image/79/79575/79575s.jpg" />
+            <p class="book-title mt-5 fs-12">我的冰山美女老婆</p>
+          </div>
+          <div class="book flex flex-col">
+            <var-image class="book-cover" lazy src="https://www.qb5.tw/files/article/image/79/79575/79575s.jpg" />
+            <p class="book-title mt-5 fs-12">我的冰山美女老婆</p>
+          </div>
         </div>
       </div>
     </div>
-
-    <div class="book-category">
-      <TitleRow
-        class="mt-15"
-        title="为你推荐"
-        right-title="查看更多"
-        right-icon="chevron-right"
-        @click="handleClick"
-      ></TitleRow>
-
-      <div class="books flex mt-15">
-        <div class="book flex flex-col">
-          <var-image class="book-cover" lazy src="https://www.qb5.tw/files/article/image/79/79575/79575s.jpg" />
-          <p class="book-title mt-5 fs-12">我的冰山美女老婆</p>
-        </div>
-        <div class="book flex flex-col">
-          <var-image class="book-cover" lazy src="https://www.qb5.tw/files/article/image/79/79575/79575s.jpg" />
-          <p class="book-title mt-5 fs-12">我的冰山美女老婆</p>
-        </div>
-        <div class="book flex flex-col">
-          <var-image class="book-cover" lazy src="https://www.qb5.tw/files/article/image/79/79575/79575s.jpg" />
-          <p class="book-title mt-5 fs-12">我的冰山美女老婆</p>
-        </div>
-        <div class="book flex flex-col">
-          <var-image class="book-cover" lazy src="https://www.qb5.tw/files/article/image/79/79575/79575s.jpg" />
-          <p class="book-title mt-5 fs-12">我的冰山美女老婆</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="book-category">
-      <TitleRow
-        class="mt-15"
-        title="为你推荐"
-        right-title="查看更多"
-        right-icon="chevron-right"
-        @click="handleClick"
-      ></TitleRow>
-
-      <div class="books flex mt-15">
-        <div class="book flex flex-col">
-          <var-image class="book-cover" lazy src="https://www.qb5.tw/files/article/image/79/79575/79575s.jpg" />
-          <p class="book-title mt-5 fs-12">我的冰山美女老婆</p>
-        </div>
-        <div class="book flex flex-col">
-          <var-image class="book-cover" lazy src="https://www.qb5.tw/files/article/image/79/79575/79575s.jpg" />
-          <p class="book-title mt-5 fs-12">我的冰山美女老婆</p>
-        </div>
-        <div class="book flex flex-col">
-          <var-image class="book-cover" lazy src="https://www.qb5.tw/files/article/image/79/79575/79575s.jpg" />
-          <p class="book-title mt-5 fs-12">我的冰山美女老婆</p>
-        </div>
-        <div class="book flex flex-col">
-          <var-image class="book-cover" lazy src="https://www.qb5.tw/files/article/image/79/79575/79575s.jpg" />
-          <p class="book-title mt-5 fs-12">我的冰山美女老婆</p>
-        </div>
-      </div>
-    </div>
-
-    <div></div>
   </div>
 </template>
 
@@ -201,6 +203,14 @@ const handleClick =() => {
   &-search {
     border-radius: 50px;
     background-color: #eee;
+    &-wrapper {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      height: 60px;
+      background-color: #fff;
+      z-index: 9999;
+    }
   }
   .br-round {
     border-radius: 20px;
