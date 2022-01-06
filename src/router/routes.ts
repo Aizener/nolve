@@ -23,6 +23,11 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('../views/Personal.vue')
       }
     ]
+  },
+  {
+    name: 'List',
+    path: '/list',
+    component: () => import('../views/List.vue')
   }
 ]
 

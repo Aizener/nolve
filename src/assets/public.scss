@@ -76,8 +76,23 @@ $colorName: '000', '333', '666', '999', 'ccc', 'ddd', 'eee', 'fff', '0ff', '8ff'
 .lh-1 { line-height: 1; }
 .lh-15 { line-height: 1.5;}
 
+.hidden { overflow: hidden; }
+
 .text-center { text-align: center;}
 .text-right { text-align: right; }
+
+.line-1 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.line-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+}
 
 @font-face {
   font-family: "my-icons"; /* Project id 2063813 */

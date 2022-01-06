@@ -167,8 +167,11 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import BookRow from '@/components/BookRow.vue'
 import TitleRow from '@/components/TitleRow.vue'
+
+const router = useRouter()
 
 const active = ref(0)
 const categories = ref<Array<Category>>([
@@ -188,7 +191,7 @@ const books = ref<Array<Book>>([
 ])
 
 const handleClick =() => {
-  alert('clicked.')
+  router.push('/list')
 }
 
 </script>
