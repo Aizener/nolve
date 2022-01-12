@@ -1,5 +1,9 @@
 <template>
-  <div class="article flex flex-col" :class="[showModel === ShowModel.night && 'night']" @click="handleToggleSettings">
+  <div
+    class="article flex flex-col"
+    :class="[showModel === ShowModel.night && 'night']"
+    @click="handleToggleSettings"
+  >
     <div class="article-title">第一章 陨落的天才</div>
     <div class="article-content flex-1">
       <section class="read-section jsChapterWrapper">
@@ -11,13 +15,13 @@
       </section>
       <div class="read-bottom flex flex-row-between">
         <p>上一章</p>
-        <p>目录</p>
+        <p>本书主页</p>
         <p>下一章</p>
       </div>
     </div>
+
     <div class="article-status top w-100 flex flex-row-between flex-col-center px-20" :class="{ 'show': showSettings }" @click.stop="">
       <div class="status-left">
-      11
       </div>
       <div class="like flex flex-col-center px-10 py-5" :class="{ liked: liked }" @click="handleLike">
         <var-icon name="star" color="orange" size="13" v-show="liked" />
@@ -25,26 +29,55 @@
         <span class="fs-12 color-fff ml-5">{{ liked ? '已加书架' : '加入书架' }}</span>
       </div>
     </div>
-    <div class="article-status bottom flex" :class="{ 'show': showSettings }" @click.stop="">
-      <div class="article-status__item">
-        <var-icon name="format-list-checkbox" color="#fff" />
-        <p class="fs-12 color-fff">目录</p>
+
+    <div>
+      <div class="article-status bottom flex" :class="{ 'show': showSettings }" @click.stop="">
+        <div class="article-status__item">
+          <var-icon name="format-list-checkbox" color="#fff" @click="showPopup = true" />
+          <p class="fs-12 color-fff">目录</p>
+        </div>
+        <div class="article-status__item" @click="showStatusSettigs = !showStatusSettigs">
+          <var-icon name="translate" color="#fff" />
+          <p class="fs-12 color-fff">设置</p>
+        </div>
+        <div class="article-status__item" @click="handleChangeShowModel">
+          <template v-if="showModel === ShowModel.day">
+            <var-icon name="weather-night" color="#fff" />
+            <p class="fs-12 color-fff">夜间</p>
+          </template>
+          <template v-if="showModel === ShowModel.night">
+            <var-icon name="white-balance-sunny" color="#fff" />
+            <p class="fs-12 color-fff">日间</p>
+          </template>
+        </div>
       </div>
-      <div class="article-status__item">
-        <var-icon name="translate" color="#fff" />
-        <p class="fs-12 color-fff">设置</p>
-      </div>
-      <div class="article-status__item" @click="handleChangeShowModel">
-        <template v-if="showModel === ShowModel.day">
-          <var-icon name="weather-night" color="#fff" />
-          <p class="fs-12 color-fff">夜间</p>
-        </template>
-        <template v-if="showModel === ShowModel.night">
-          <var-icon name="white-balance-sunny" color="#fff" />
-          <p class="fs-12 color-fff">日间</p>
-        </template>
+      <div class="status-settings flex flex-col flex-row-center px-15" @click.stop="" v-show="showSettings && showStatusSettigs">
+        <div class="flex flex-row-center px-15">
+          <var-icon namespace="icon" name="24gl-fontSizeDecrease" color="#fff" @click="fontSize > 0 && fontSize --" />
+          <var-slider class="flex-1 mx-10" v-model="fontSize" />
+          <var-icon namespace="icon" name="24gl-fontSizeIncrease" color="#fff" @click="fontSize < 100 && fontSize ++" />
+        </div>
       </div>
     </div>
+
+    <var-popup position="right" v-model:show="showPopup" overlay-class="catelogue">
+      <div class="catelogue-wrapper flex flex-col" @click.stop="">
+        <p class="flex flex-row-center flex-col-center catelogue-title py-10 fs-14">新书最新章节</p>
+        <div class="catelogue-settings flex flex-row-end">
+          <p class="color-333 fs-14 p-10" @click="orderAsc = !orderAsc">{{ orderAsc ? '倒叙' : '正序' }}</p>
+        </div>
+        <ul class="catelogue-list flex-1">
+          <li
+            class="catelogue-item p-10 color-666 fs-14"
+            v-for="(item, idx) in catelogueList"
+            :key="idx"
+          >
+            <span>第{{ item }}章</span>
+            <span class="ml-10">斗之气，三段</span>
+          </li>
+        </ul>
+      </div>
+    </var-popup>
   </div>
 </template>
 
@@ -52,18 +85,42 @@
 import { ShowModel } from '@/shared/variable'
 import { useMainStore } from '@/store/index'
 import { storeToRefs } from 'pinia'
-import { ref } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 
 const mainStore = useMainStore()
+const showPopup = ref(false)
 const showSettings = ref(false)
-const { showModel } = storeToRefs(mainStore)
+const showStatusSettigs = ref(false)
+const orderAsc = ref(true)
+const _list = Array(600).fill(0).map((_, idx) => idx + 1)
+const list = [..._list]
+const reverseList = [..._list.reverse()]
+const catelogueList = computed(() => {
+  return orderAsc.value ? list : reverseList
+})
+const { showModel, fontSize } = storeToRefs(mainStore)
 
 const liked = ref(false)
 const handleLike = () => {
   liked.value = !liked.value
 }
 
+onMounted(() => {
+  document.querySelector('.catelogue')?.addEventListener('click', e => {
+    e.stopPropagation()
+  })
+})
+
+const theme = computed(() => {
+  let size: string | number = 12 + (24 - 12) * fontSize.value / 100
+  size = size.toFixed(2) + 'px'
+  return {
+    size,
+  } 
+})
+
 const handleToggleSettings = () => {
+  showStatusSettigs.value = false
   showSettings.value = !showSettings.value
 }
 const handleChangeShowModel = () => {
@@ -78,7 +135,7 @@ const handleChangeShowModel = () => {
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  background: linear-gradient(to right,#c4b195, #c4b695, #c4b195);
+  background: linear-gradient(to right,#c4b195, #c4b695);
   &-title {
     font-size: 12px;
     padding: 10px 15px;
@@ -98,7 +155,7 @@ const handleChangeShowModel = () => {
       color: rgba(0,0,0,.85);
       line-height: 1.7;
       font-weight: 400;
-      font-size: 18px;
+      font-size: v-bind('theme.size');
     }
     .read-bottom {
       padding: 0 30px;
@@ -160,6 +217,37 @@ const handleChangeShowModel = () => {
     &.liked {
       border-color: orange;
       span { color: orange; }
+    }
+  }
+
+  .status-settings {
+    width: 100%;
+    height: 80px;
+    background-color: rgba(0, 0, 0, .9);
+    position: fixed;
+    bottom: 45px;
+    border-bottom: 1px solid gray;
+  }
+  
+  .catelogue {
+    &-wrapper {
+      width: 80vw;
+      height: 100vh;
+      overflow: hidden;
+      background-color: #fff;
+    }
+    &-title {
+      color: #3a7afe;
+      border-bottom: 1px solid #3a7afe;
+    }
+    &-settings {
+      border-bottom: 1px dashed #ccc;;
+    }
+    &-list {
+      overflow-y: auto;
+    }
+    &-item {
+      border-bottom: 1px solid #eee;
     }
   }
 }

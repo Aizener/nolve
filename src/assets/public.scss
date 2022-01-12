@@ -121,3 +121,53 @@ $colorName: '000', '333', '666', '999', 'ccc', 'ddd', 'eee', 'fff', '0ff', '8ff'
 .icon-huanyihuan:before {
   content: "\e65f";
 }
+
+@font-face {
+  font-family: "icon"; /* Project id 2063813 */
+  src: url('//at.alicdn.com/t/font_2063813_856u8x4mgij.woff2?t=1641908018158') format('woff2'),
+       url('//at.alicdn.com/t/font_2063813_856u8x4mgij.woff?t=1641908018158') format('woff'),
+       url('//at.alicdn.com/t/font_2063813_856u8x4mgij.ttf?t=1641908018158') format('truetype');
+}
+
+.icon {
+  font-family: "icon" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 字体样式 */
+.icon--set,
+.icon--set::before {
+  position: relative;
+  display: inline-block;
+  font: normal normal normal 14px/1 "icon";
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+.icon-24gl-fontSizeIncrease:before {
+  content: "\eb05";
+}
+
+.icon-24gl-fontSizeDecrease:before {
+  content: "\eb04";
+}
+
+.icon-zitidaxiao:before {
+  content: "\e604";
+}
+
+.icon-huanyihuan:before {
+  content: "\e65f";
+}
+
+.icon-search:before {
+  content: "\e741";
+}
+
+.icon-fanhui:before {
+  content: "\e646";
+}
