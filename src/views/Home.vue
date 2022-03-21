@@ -1,7 +1,7 @@
 <template>
   <div class="home w-100 pb-15">
     <div class="home-search-wrapper flex flex-col-center px-15">
-      <div class="home-search flex flex-col-center w-100 px-10 py-8">
+      <div class="home-search flex flex-col-center w-100 px-10 py-8" @click="$router.push('/search')">
         <var-icon namespace="icon" name="search" color="#ccc" />
         <span class="fs-12 color-999 ml-5">输入作者或书名</span>
       </div>

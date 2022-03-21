@@ -1,42 +1,23 @@
 <template>
-  <div class="list flex w-100 vh-100">
-    <var-tabs
-      class="vertical-tabs"
-      elevation
-      layout-direction="vertical"
-      active-color="orange"
-      inactive-color="#999"
-      v-model:active="active"
-    >
-      <var-tab>男生人气</var-tab>
-      <var-tab>女生人气</var-tab>
-      <var-tab>玄幻新榜</var-tab>
-      <var-tab>玄幻新榜</var-tab>
-      <var-tab>玄幻新榜</var-tab>
-      <var-tab>玄幻新榜</var-tab>
-      <var-tab>玄幻新榜</var-tab>
-      <var-tab>玄幻新榜</var-tab>
-      <var-tab>玄幻新榜</var-tab>
-    </var-tabs>
-    <div class="list-content flex-1 px-15 pb-10">
-      <var-list
-        :finished="finished"
-        v-model:loading="loading"
-        @load="load"
-      >
-        <BookList :list="list" />
-      </var-list>
+  <div class="search">
+    <div class="search-wrapper" :class="className">
+      <var-input
+        placeholder="请输入书名或者作者名"
+        clearable
+        v-model="value"
+      />
+    </div>
+    <div class="search-list">
+      <BookList :list="list" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import BookList from '@/components/BookList.vue'
+import { ref, onMounted } from 'vue'
 
-const active = ref(0)
-const finished = ref(false)
-const loading = ref(false)
+import BookList  from '@/components/BookList.vue'
+const value = ref('')
 
 const list = ref([
   { title: '都市极品神医', desc: '这儿离是胜多负少的范水电费水电费这儿离是胜多负少的范水电这儿离是胜多负少的范水电费水电费这儿离是胜多负少的范水电', author: '分那个会笑', date: '21年12月' },
@@ -50,47 +31,42 @@ const list = ref([
   { title: '都市极品神医', desc: '这儿离是胜多负少的范水电费水电费这儿离是胜多负少的范水电这儿离是胜多负少的范水电费水电费这儿离是胜多负少的范水电', author: '分那个会笑', date: '21年12月' },
   { title: '都市极品神医', desc: '这儿离是胜多负少的范水电费水电费这儿离是胜多负少的范水电这儿离是胜多负少的范水电费水电费这儿离是胜多负少的范水电', author: '分那个会笑', date: '21年12月' },
 ])
-const load = () => {
-  setTimeout(() => {
-    list.value = [...list.value, ...[
-      { title: '都市极品神医', desc: '这儿离是胜多负少的范水电费水电费这儿离是胜多负少的范水电这儿离是胜多负少的范水电费水电费这儿离是胜多负少的范水电', author: '分那个会笑', date: '21年12月' },
-      { title: '都市极品神医', desc: '这儿离是胜多负少的范水电费水电费这儿离是胜多负少的范水电这儿离是胜多负少的范水电费水电费这儿离是胜多负少的范水电', author: '分那个会笑', date: '21年12月' },
-      { title: '都市极品神医', desc: '这儿离是胜多负少的范水电费水电费这儿离是胜多负少的范水电这儿离是胜多负少的范水电费水电费这儿离是胜多负少的范水电', author: '分那个会笑', date: '21年12月' }
-    ]]
-    loading.value = false
-    if (list.value.length > 20) {
-      finished.value = true
+
+const className = ref('')
+
+onMounted(() => {
+  window.addEventListener('scroll', () => {
+    const scrollTop = document.documentElement.scrollTop
+    console.log(scrollTop)
+    if (scrollTop > 0) {
+      className.value = 'shadow'
+    } else {
+      className.value = ''
     }
-  }, 1e3)
-  console.log('load')
-}
+  })
+})
 </script>
 
 <style lang="scss" scoped>
-.vertical-tabs {
-  width: 80px;
-  min-width: 80px;
-  height: 100%;
-  background-color: rgb(247, 247, 247);
-  .var-tab {
-    flex-grow: 0;
-    height: 40px;
-    &--active {
-      background-color: #fff;
+.search {
+  padding-top: 50px;
+  padding-bottom: 10px;
+  &-wrapper {
+    left: 0; top: 0;
+    background-color: #fff;
+    padding: 0 10px;
+    width: 100%;
+    position: fixed;
+    padding-bottom: 7px;
+    &.shadow {
+      box-shadow: 0 2px 3px #ccc;
     }
   }
-}
-
-.list-content {
-  height: 100%;
-  overflow-y: auto;
-}
-
-.book {
-  &-cover {
-    width: 60px;
-    min-width: 60px;
-    height: 80px;
+  &-list {
+    padding: 0 10px;
+  }
+  & :v-deep(.var-input) {
+    margin-top: 5px;
   }
 }
 </style>
