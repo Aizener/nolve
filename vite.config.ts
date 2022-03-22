@@ -8,7 +8,8 @@ import { resolve } from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
   server: {
-    host: true
+    host: true,
+    port: 5000
   },
   plugins: [
     vue(),
