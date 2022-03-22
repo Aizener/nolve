@@ -168,7 +168,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import BookRow from '@/components/BookRow.vue'
 import TitleRow from '@/components/TitleRow.vue'
@@ -195,6 +195,10 @@ const books = ref<Array<Book>>([
 const handleClick =() => {
   router.push('/list')
 }
+console.log(111)
+onMounted(() => {
+  console.log('mounted')
+})
 
 </script>
 

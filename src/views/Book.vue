@@ -1,5 +1,8 @@
 <template>
   <div class="book">
+    <div class="book-top">
+      <p class="book-top--time">阅读时长<span>192</span>小时</p>
+    </div>
     <div class="book-list">
       <div class="book-list--item" v-for="(item, idx) in books" :key="idx">
         <div class="book-list--cover"></div>
@@ -37,11 +40,29 @@ const books = ref([{
 }])
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .book {
   min-height: calc(100vh - 50px);
   overflow: hidden;
   background-color: rgb(245, 245, 245);
+  padding-top: 40px;
+  &-top {
+    width: 100%;
+    height: 45px;
+    background-color: #fff;
+    position: fixed;
+    left: 0; top: 0;
+    box-shadow: 0 2px 3px #ccc;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    &--time {
+      font-size: 12px;
+      span {
+        font-size: 16px;
+      }
+    }
+  }
   &-list {
     display: flex;
     flex-wrap: wrap;

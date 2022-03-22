@@ -2,11 +2,12 @@
   <div class="frame w-100 vh-100 flex flex-col">
     <div class="frame__container flex-1">
       <router-view v-slot="{ Component }">
-        <transition name="fade">
+        <transition name="fade" v-if="$route.meta.keepAlive">
           <keep-alive>
             <component :is="Component" />
           </keep-alive>
         </transition>
+        <component :is="Component" v-if="!$route.meta.keepAlive" />
       </router-view>
     </div>
     <div class="frame__tabbar w-100">

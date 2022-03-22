@@ -10,16 +10,25 @@ const routes: Array<RouteRecordRaw> = [
       {
         name: 'Home',
         path: '/home',
+        meta: {
+          keepAlive: true
+        },
         component: () => import('../views/Home.vue')
       },
       {
         name: 'Book',
         path: '/book',
+        meta: {
+          keepAlive: true
+        },
         component: () => import('../views/Book.vue')
       },
       {
         name: 'Personal',
         path: '/personal',
+        meta: {
+          keepAlive: true
+        },
         component: () => import('../views/Personal.vue')
       }
     ]

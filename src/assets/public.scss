@@ -95,39 +95,12 @@ $colorName: '000', '333', '666', '999', 'ccc', 'ddd', 'eee', 'fff', '0ff', '8ff'
 }
 
 @font-face {
-  font-family: "my-icons"; /* Project id 2063813 */
-  src: url('//at.alicdn.com/t/font_2063813_9b7mqs2ioft.woff2?t=1639215587749') format('woff2'),
-       url('//at.alicdn.com/t/font_2063813_9b7mqs2ioft.woff?t=1639215587749') format('woff'),
-       url('//at.alicdn.com/t/font_2063813_9b7mqs2ioft.ttf?t=1639215587749') format('truetype');
-}
-
-/* 字体样式 */
-.icon--set,
-.icon--set::before {
-  position: relative;
-  display: inline-block;
-  font: normal normal normal 14px/1 "my-icons";
-  font-size: inherit;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-}
-
-.icon-search:before {
-  content: "\e741";
-}
-.icon-fanhui:before {
-  content: "\e646";
-}
-.icon-huanyihuan:before {
-  content: "\e65f";
-}
-
-@font-face {
   font-family: "icon"; /* Project id 2063813 */
-  src: url('//at.alicdn.com/t/font_2063813_856u8x4mgij.woff2?t=1641908018158') format('woff2'),
-       url('//at.alicdn.com/t/font_2063813_856u8x4mgij.woff?t=1641908018158') format('woff'),
-       url('//at.alicdn.com/t/font_2063813_856u8x4mgij.ttf?t=1641908018158') format('truetype');
+  src: url('//at.alicdn.com/t/font_2063813_5slscr5wyv9.woff2?t=1647953430859') format('woff2'),
+       url('//at.alicdn.com/t/font_2063813_5slscr5wyv9.woff?t=1647953430859') format('woff'),
+       url('//at.alicdn.com/t/font_2063813_5slscr5wyv9.ttf?t=1647953430859') format('truetype');
 }
+
 
 .icon {
   font-family: "icon" !important;
@@ -146,6 +119,22 @@ $colorName: '000', '333', '666', '999', 'ccc', 'ddd', 'eee', 'fff', '0ff', '8ff'
   font-size: inherit;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
+}
+
+.icon-guanyu:before {
+  content: "\e633";
+}
+
+.icon-xieyi:before {
+  content: "\e6ef";
+}
+
+.icon-yuedu:before {
+  content: "\e806";
+}
+
+.icon-shoucang:before {
+  content: "\e617";
 }
 
 .icon-24gl-fontSizeIncrease:before {
@@ -171,3 +160,4 @@ $colorName: '000', '333', '666', '999', 'ccc', 'ddd', 'eee', 'fff', '0ff', '8ff'
 .icon-fanhui:before {
   content: "\e646";
 }
+
